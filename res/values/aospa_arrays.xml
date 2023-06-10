@@ -5,6 +5,25 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- Charging control -->
+    <string-array name="charging_control_mode_entries" translatable="false">
+        <item>@string/charging_control_mode_auto_title</item>
+        <item>@string/charging_control_mode_custom_title</item>
+    </string-array>
+
+    <string-array name="charging_control_mode_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="charging_control_mode_entries_fine_grained_control" translatable="false">
+        <item>@string/charging_control_mode_limit_title</item>
+    </string-array>
+
+    <string-array name="charging_control_mode_values_fine_grained_control" translatable="false">
+        <item>3</item>
+    </string-array>
+
     <!-- Screen off gestures -->
     <string-array name="gestures_entries">
         <item>@string/gestures_disabled</item>

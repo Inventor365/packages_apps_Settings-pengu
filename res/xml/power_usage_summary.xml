@@ -110,4 +110,19 @@
         android:key="power_usage_footer"
         android:title="@string/battery_footer_summary"
         settings:searchable="false" />
+
+    <Preference
+        android:key="charging_control"
+        android:title="@string/charging_control_title"
+        android:summary="@string/charging_control_summary"
+        android:fragment="co.aospa.settings.lineage.health.ChargingControlSettings"
+        settings:controller="co.aospa.settings.lineage.health.ChargingControlPreferenceController" />
+
+    <ListPreference
+        android:entries="@*android:array/charging_speed_entries"
+        android:entryValues="@*android:array/charging_speed_values"
+        android:key="charging_speed"
+        android:summary="%s"
+        android:title="@*android:string/charging_speed"
+        settings:controller="co.aospa.settings.lineage.health.ChargingSpeedPreferenceController" />
 </PreferenceScreen>
