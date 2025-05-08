@@ -91,3 +91,6 @@
 
 # ThemePicker reads the custom clock styles from here through reflection.
 -keep class com.android.settings.lockscreen.ClockUtils { *; }
+
+# Keep AOSPA settings classes
+-keep public class co.aospa.settings.** { *; }
