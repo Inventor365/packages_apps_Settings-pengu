@@ -130,6 +130,8 @@
     <string name="experimental_features_summary">Try features that are still being worked on</string>
     <string name="ls_media_expand_title">iOS-style lock screen media art</string>
     <string name="ls_media_expand_summary">Tap the artwork in the lock screen player to fill the lock screen with it, and tap it again to go back</string>
+    <string name="ls_media_motion_art_title">Animated album art</string>
+    <string name="ls_media_motion_art_summary">Loop the album\'s motion artwork in the expanded player when Apple has one. Looks up the playing song\'s artist and title on Apple Music</string>
     <string name="back_to_app_indicator_title">Back to app</string>
     <string name="back_to_app_indicator_summary">When an app opens another, show the app you came from in the status bar and tap it to go back</string>
 </resources>
