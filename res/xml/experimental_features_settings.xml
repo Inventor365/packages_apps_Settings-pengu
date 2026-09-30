@@ -21,6 +21,12 @@
         android:dependency="ls_media_expand"
         android:defaultValue="false" />
 
+    <com.android.settings.custom.preference.SecureSettingSwitchPreference
+        android:key="qs_oneui_experimental"
+        android:title="@string/qs_oneui_title"
+        android:summary="@string/qs_oneui_summary"
+        android:defaultValue="false" />
+
     <com.android.settings.custom.preference.SystemSettingSwitchPreference
         android:key="back_to_app_indicator"
         android:title="@string/back_to_app_indicator_title"

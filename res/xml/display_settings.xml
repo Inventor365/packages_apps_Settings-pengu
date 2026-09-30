@@ -57,7 +57,8 @@
             android:entries="@array/qs_panel_style_entries"
             android:entryValues="@array/qs_panel_style_values"
             android:defaultValue="1"
-            android:summary="%s" />
+            android:summary="%s"
+            settings:controller="com.android.settings.display.QsPanelStylePreferenceController" />
 
         <com.android.settings.custom.preference.SecureSettingSwitchPreference
             android:key="qs_connectivity_folder"

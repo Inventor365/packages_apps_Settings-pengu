@@ -134,4 +134,8 @@
     <string name="ls_media_motion_art_summary">Loop the album\'s motion artwork in the expanded player when Apple has one. Looks up the playing song\'s artist and title on Apple Music</string>
     <string name="back_to_app_indicator_title">Back to app</string>
     <string name="back_to_app_indicator_summary">When an app opens another, show the app you came from in the status bar and tap it to go back</string>
+    <!-- One UI Quick Settings experiment -->
+    <string name="qs_oneui_title">One UI Quick Settings</string>
+    <string name="qs_oneui_summary">Replaces Quick Settings with a One UI style panel and always uses the split notification and Quick Settings shade. Other Quick Settings styles are incompatible and won\'t apply while this is on. Turning it off restores your previous style and shade.</string>
+    <string name="qs_panel_style_oneui_active">Unavailable while One UI Quick Settings is on in Experimental features</string>
 </resources>
