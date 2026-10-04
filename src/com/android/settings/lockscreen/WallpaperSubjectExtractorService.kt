@@ -61,6 +61,8 @@ class WallpaperSubjectExtractorService : Service() {
     companion object {
         @JvmField
         val ACTION_EXTRACT_NOW = "com.android.settings.action.EXTRACT_DEPTH_SUBJECT_NOW"
+        /** Set when the caller has just put the photo on the lock screen for us to cut out. */
+        const val EXTRA_FROM_LOCK = "from_lock"
     }
 
     private val handler = Handler(Looper.getMainLooper())
@@ -146,7 +148,8 @@ class WallpaperSubjectExtractorService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val action = intent?.action
         if (action == ACTION_EXTRACT_NOW) {
-            scheduleExtraction(force = true)
+            scheduleExtraction(force = true,
+                    fromLock = intent.getBooleanExtra(EXTRA_FROM_LOCK, false))
         } else if (action == Intent.ACTION_WALLPAPER_CHANGED) {
             if (isAutoSubjectEnabled() && isDepthEnabled()) {
                 scheduleDelayedExtraction(300)
@@ -177,11 +180,11 @@ class WallpaperSubjectExtractorService : Service() {
     private fun isAutoSubjectEnabled() =
         Settings.System.getInt(contentResolver, SETTING_AUTO_SUBJECT, 0) != 0
 
-    private fun scheduleExtraction(force: Boolean = false) {
+    private fun scheduleExtraction(force: Boolean = false, fromLock: Boolean = false) {
         processingThread?.interrupt()
         processingThread = Thread {
             try {
-                runExtraction(force)
+                runExtraction(force, fromLock)
             } catch (e: InterruptedException) {
                 // extraction cancelled
             } catch (e: Exception) {
@@ -190,7 +193,7 @@ class WallpaperSubjectExtractorService : Service() {
         }.also { it.start() }
     }
 
-    private fun runExtraction(force: Boolean) {
+    private fun runExtraction(force: Boolean, fromLock: Boolean = false) {
         if (!force) {
             if (!isAutoSubjectEnabled() || !isDepthEnabled()) return
         }
@@ -203,8 +206,11 @@ class WallpaperSubjectExtractorService : Service() {
 
         val wm = WallpaperManager.getInstance(this)
         val isLive = wm.wallpaperInfo != null
+        // A live wallpaper can't be cut out, and the lock image behind it is only Android's
+        // fallback, not what is on screen: leave the subject to whoever set the wallpaper.
+        if (isLive && !force) return
 
-        val wallpaperBitmap = loadWallpaperBitmap(wm, isLive)
+        val wallpaperBitmap = loadWallpaperBitmap(wm, isLive, fromLock)
         if (wallpaperBitmap == null) {
             Log.e(TAG, "loadWallpaperBitmap returned null — cannot extract")
             return
@@ -286,9 +292,11 @@ class WallpaperSubjectExtractorService : Service() {
         }
     }
 
-    private fun loadWallpaperBitmap(wm: WallpaperManager, isLive: Boolean): Bitmap? {
-        if (isLive) {
-            loadFromDeStorage()?.let { return it }
+    private fun loadWallpaperBitmap(wm: WallpaperManager, isLive: Boolean,
+            fromLock: Boolean): Bitmap? {
+        if (isLive && !fromLock) {
+            // Under a live wallpaper the lock image is a stale fallback; never cut that out
+            return loadFromDeStorage()
         }
 
         try {
