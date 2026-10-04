@@ -33,4 +33,25 @@
         android:summary="@string/back_to_app_indicator_summary"
         android:defaultValue="false" />
 
+    <com.android.settings.custom.preference.SecureSettingSwitchPreference
+        android:key="recents_frequent_apps"
+        android:title="@string/recents_frequent_apps_title"
+        android:summary="@string/recents_frequent_apps_summary"
+        android:defaultValue="false" />
+
+    <com.android.settings.custom.preference.SecureSettingSwitchPreference
+        android:key="depth_wallpaper_floating"
+        android:title="@string/depth_wallpaper_floating_title"
+        android:summary="@string/depth_wallpaper_floating_summary"
+        android:defaultValue="false" />
+
+    <Preference
+        android:key="edge_lighting"
+        android:title="@string/edge_lighting_title"
+        android:summary="@string/edge_lighting_summary">
+        <intent
+            android:targetPackage="co.aospa.edgelighting"
+            android:targetClass="co.aospa.edgelighting.EdgeLightingActivity" />
+    </Preference>
+
 </PreferenceScreen>
