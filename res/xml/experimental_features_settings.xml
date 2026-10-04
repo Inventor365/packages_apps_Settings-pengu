@@ -50,8 +50,8 @@
         android:title="@string/edge_lighting_title"
         android:summary="@string/edge_lighting_summary">
         <intent
-            android:targetPackage="co.aospa.edgelighting"
-            android:targetClass="co.aospa.edgelighting.EdgeLightingActivity" />
+            android:targetPackage="com.penguin.edgelighting"
+            android:targetClass="com.penguin.edgelighting.EdgeLightingActivity" />
     </Preference>
 
 </PreferenceScreen>
