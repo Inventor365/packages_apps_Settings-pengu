@@ -138,8 +138,8 @@
     <string name="recents_frequent_apps_summary">Show the four apps you used most this week below recent apps</string>
     <string name="depth_wallpaper_floating_title">Floating depth wallpaper</string>
     <string name="depth_wallpaper_floating_summary">With a depth wallpaper, the lock screen clock floats between the wallpaper and its subject as you tilt the phone</string>
-    <string name="edge_lighting_title">Edge lighting</string>
-    <string name="edge_lighting_summary">Rain a photo\'s subject across the screen when a notification arrives while the screen is off</string>
+    <string name="penguin_laboratory_title">Penguin Laboratory</string>
+    <string name="penguin_laboratory_summary">Edge lighting and more experiments</string>
     <!-- One UI Quick Settings experiment -->
     <string name="qs_oneui_title">One UI Quick Settings</string>
     <string name="qs_oneui_summary">Replaces Quick Settings with a One UI style panel and always uses the split notification and Quick Settings shade. Other Quick Settings styles are incompatible and won\'t apply while this is on. Turning it off restores your previous style and shade.</string>

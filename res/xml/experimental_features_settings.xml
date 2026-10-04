@@ -46,12 +46,12 @@
         android:defaultValue="false" />
 
     <Preference
-        android:key="edge_lighting"
-        android:title="@string/edge_lighting_title"
-        android:summary="@string/edge_lighting_summary">
+        android:key="penguin_laboratory"
+        android:title="@string/penguin_laboratory_title"
+        android:summary="@string/penguin_laboratory_summary">
         <intent
-            android:targetPackage="com.penguin.edgelighting"
-            android:targetClass="com.penguin.edgelighting.EdgeLightingActivity" />
+            android:targetPackage="com.penguin.laboratory"
+            android:targetClass="com.penguin.laboratory.LaboratoryActivity" />
     </Preference>
 
 </PreferenceScreen>
