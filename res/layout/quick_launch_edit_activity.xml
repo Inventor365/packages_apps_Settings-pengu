@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2026 Project ASCP
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground"
+    android:fitsSystemWindows="true">
+
+    <!-- Top Toolbar with [X] Title and [✓] -->
+    <RelativeLayout
+        android:id="@+id/edit_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageView
+            android:id="@+id/edit_btn_close"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="12dp"
+            android:src="@drawable/fp_ql_menu_edit_ic_cancel"
+            android:contentDescription="@string/quick_launch_cancel" />
+
+        <TextView
+            android:id="@+id/edit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/fingerprint_ql_setting_edit_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary" />
+
+        <ImageView
+            android:id="@+id/edit_btn_save"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="12dp"
+            android:src="@drawable/fp_ql_menu_edit_ic_save"
+            android:contentDescription="@string/fingerprint_ql_save" />
+
+    </RelativeLayout>
+
+    <!-- Subtitle: "Hold and drag to arrange" -->
+    <TextView
+        android:id="@+id/edit_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/fingerprint_ql_setting_preview_tips"
+        android:textSize="12sp"
+        android:textColor="?android:attr/textColorSecondary" />
+
+    <!-- Arc preview panel -->
+    <FrameLayout
+        android:id="@+id/edit_arc_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <!-- In-display fingerprint icon at bottom center -->
+        <ImageView
+            android:id="@+id/edit_fp_icon"
+            android:layout_width="@dimen/fp_ql_icon_size"
+            android:layout_height="@dimen/fp_ql_icon_size"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/fp_ql_icon_margin_bottom"
+            android:src="@drawable/settings_fp_quick_launch_ic"
+            android:contentDescription="@null" />
+
+        <!-- 5-slot Arc RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/edit_arc_recycler"
+            android:layout_width="@dimen/kgd_fp_ql_recycler_view_width"
+            android:layout_height="@dimen/kgd_fp_ql_recycler_view_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/fp_ql_recyclerview_margin_bottom"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:overScrollMode="never" />
+
+    </FrameLayout>
+
+    <!-- Divider Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:background="?android:attr/listDivider"
+        android:alpha="0.2" />
+
+    <!-- Tabs: Functions | Apps -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/edit_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/colorBackground"
+        android:elevation="4dp"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabIndicatorFullWidth="false"
+        app:tabTextColor="?android:attr/textColorSecondary"
+        app:tabSelectedTextColor="?android:attr/colorAccent"
+        app:tabIndicatorColor="?android:attr/colorAccent"
+        app:tabRippleColor="@null" />
+
+    <!-- ViewPager2 with 2 pages: Functions & Apps -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/edit_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipChildren="true"
+        android:clipToPadding="true" />
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <size android:height="36.0dip" android:width="36.0dip" />
+            <solid android:color="#fffb6a35" />
+        </shape>
+    </item>
+    <item android:height="36.0dip" android:width="36.0dip" android:drawable="@drawable/settings_fp_quick_launch_ic_inner" android:top="0.0dip" android:start="0.0dip" />
+</layer-list>

@@ -887,4 +887,7 @@ public class Settings extends SettingsActivity {
 
     // RefreshRate
     public static class ScreenRefreshRateActivity extends SettingsActivity {}
+
+    // QuickLaunch
+    public static class QuickLaunchSettingsActivity extends SettingsActivity {}
 }

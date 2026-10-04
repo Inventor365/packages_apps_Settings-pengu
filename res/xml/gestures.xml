@@ -48,6 +48,13 @@
         settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
     <Preference
+        android:key="gesture_quick_launch"
+        android:title="@string/quick_launch_title"
+        android:summary="@string/quick_launch_summary"
+        android:fragment="com.android.settings.gestures.quicklaunch.QuickLaunchSettings"
+        settings:controller="com.android.settings.gestures.quicklaunch.QuickLaunchPreferenceController" />
+
+    <Preference
         android:key="gesture_double_tap_power_input_summary"
         android:title="@string/double_tap_power_title"
         android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"

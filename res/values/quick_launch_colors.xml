@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="fp_ql_icon_filter">#33000000</color>
+    <color name="fp_ql_layout_bg">#fffafafa</color>
+    <color name="fp_ql_setting_fragment_recycle_item_background">#33fafafa</color>
+    <color name="fp_ql_setting_fragment_title_text_view">#8c000000</color>
+    <color name="fp_ql_setting_indicator_dot_color">#4d000000</color>
+    <color name="fp_ql_setting_indicator_trace_dot_color">#ff666666</color>
+    <color name="fp_ql_settings_color">#ff000000</color>
+</resources>

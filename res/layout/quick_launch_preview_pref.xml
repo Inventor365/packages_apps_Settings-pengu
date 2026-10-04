@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2026 Project ASCP
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp">
+
+    <!-- Header: "Current menu" on left, "Edit" on right -->
+    <RelativeLayout
+        android:id="@+id/preview_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:id="@+id/preview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="@string/fingerprint_ql_setting_using"
+            android:textSize="12sp"
+            android:textAllCaps="true"
+            android:letterSpacing="0.05"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <TextView
+            android:id="@+id/preview_edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/fingerprint_ql_button_edit"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/colorAccent"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </RelativeLayout>
+
+    <!-- Dark rounded preview card -->
+    <FrameLayout
+        android:id="@+id/preview_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fp_ql_preview_card_bg"
+        android:paddingTop="@dimen/fp_ql_preview_layout_padding_top"
+        android:paddingBottom="16dp"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <!-- Fingerprint Icon in the center bottom -->
+        <ImageView
+            android:id="@+id/preview_fp_icon"
+            android:layout_width="@dimen/fp_ql_icon_size"
+            android:layout_height="@dimen/fp_ql_icon_size"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/fp_ql_icon_margin_bottom"
+            android:src="@drawable/settings_fp_quick_launch_ic"
+            android:contentDescription="@null" />
+
+        <!-- Semi-circular Arc RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/preview_arc_recycler"
+            android:layout_width="@dimen/kgd_fp_ql_recycler_view_width"
+            android:layout_height="@dimen/kgd_fp_ql_recycler_view_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/fp_ql_recyclerview_margin_bottom"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:overScrollMode="never" />
+
+    </FrameLayout>
+
+</LinearLayout>
