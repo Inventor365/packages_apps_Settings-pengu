@@ -58,7 +58,7 @@ public class WallpaperDepth extends SettingsPreferenceFragment
     private static final int REQUEST_WRITE_STORAGE = 10002;
 
     private static final String FILE_PREFIX = "DEPTH_WALLPAPER_SUBJECT";
-    private static final String SAVE_DIR = "Lunaris-OS/depthwallpaper";
+    private static final String SAVE_DIR = "PenguinOS/depthwallpaper";
 
     private Preference mDepthWallpaperCustomImagePicker;
     private Preference mExtractNowPref;

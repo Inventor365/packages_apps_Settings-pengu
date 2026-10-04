@@ -256,7 +256,7 @@ class WallpaperSubjectExtractorService : Service() {
     private fun saveForeground(foreground: Bitmap): String? {
         return try {
             val baseDir = Environment.getExternalStorageDirectory()
-            val dir = File(baseDir, "Lunaris-OS/depthwallpaper")
+            val dir = File(baseDir, "PenguinOS/depthwallpaper")
 
             if (!dir.exists()) {
                 if (!dir.mkdirs()) {
