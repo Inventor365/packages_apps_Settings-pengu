@@ -121,7 +121,6 @@ class TeeSimulatorAppSettings : SettingsPreferenceFragment() {
         const val CONFIG_FILE = "config.conf"
 
         val DEFAULT_TARGETS = setOf(
-            "android",
             "com.android.vending",
             "com.google.android.gsf",
             "com.google.android.gms",
