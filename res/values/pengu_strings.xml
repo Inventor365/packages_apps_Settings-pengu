@@ -33,17 +33,6 @@
      <string name="system_black_theme_title">Use Black theme</string>
      <string name="system_black_theme_summary">Force black background colors</string>
 
-     <!-- QS panel style -->
-     <string name="qs_panel_style_title">Quick Settings style</string>
-     <string name="qs_panel_style_default">Default</string>
-     <string name="qs_panel_style_penguin">Penguin</string>
-     <string name="qs_panel_style_myui">MyUI</string>
-     <string name="qs_panel_style_harmony">HarmonyOS</string>
-
-     <!-- Connectivity folder -->
-    <string name="qs_connectivity_folder_title">Connectivity folder</string>
-    <string name="qs_connectivity_folder_summary">Group Wifi, mobile data and Bluetooth into one Quick Settings card</string>
-
      <!-- Dynamic island -->
     <string name="dynamic_island_title">Dynamic Island</string>
     <string name="dynamic_island_summary">Show media, alarms and other activity in a pill around the camera cutout</string>
@@ -72,18 +61,6 @@
     <string name="dynamic_island_lyrics_summary">Show lyrics for supported apps in a card below the music card in the island</string>
     <string name="dynamic_island_footer_title">About Dynamic Island</string>
     <string name="dynamic_island_intro">Turn on Dynamic island and choose the features you want in the centered chip.</string>
-
-    <!-- Power menu style -->
-    <string name="power_menu_style_title">Power menu style</string>
-    <string name="power_menu_style_penguin">Penguin</string>
-    <string name="power_menu_style_ios">iOS</string>
-
-    <!-- Volume panel style -->
-    <string name="volume_panel_style_title">Volume panel style</string>
-    <string name="volume_panel_style_default">Default</string>
-    <string name="volume_panel_style_expandable">Expandable</string>
-    <string name="volume_panel_style_oneui">One UI</string>
-    <string name="volume_panel_style_myui">MyUI</string>
 
     <string name="depth_wallpaper_bottom_fade_title">Bottom fade</string>
     <string name="depth_wallpaper_bottom_fade_summary">Fade out the wallpaper at the bottom</string>
@@ -125,23 +102,6 @@
     <string name="dynamic_island_recent_apps_title">Recent apps</string>
     <string name="dynamic_island_recent_apps_summary">Show the app you switched from</string>
 
-    <!-- Experimental features -->
-    <string name="experimental_features_title">Experimental features</string>
-    <string name="experimental_features_summary">Try features that are still being worked on</string>
-    <string name="ls_media_expand_title">iOS-style lock screen media art</string>
-    <string name="ls_media_expand_summary">Tap the artwork in the lock screen player to fill the lock screen with it, and tap it again to go back</string>
-    <string name="ls_media_motion_art_title">Animated album art</string>
-    <string name="ls_media_motion_art_summary">Loop the album\'s motion artwork in the expanded player when Apple has one. Looks up the playing song\'s artist and title on Apple Music</string>
-    <string name="back_to_app_indicator_title">Back to app</string>
-    <string name="back_to_app_indicator_summary">When an app opens another, show the app you came from in the status bar and tap it to go back</string>
-    <string name="recents_frequent_apps_title">Frequently used apps in recents</string>
-    <string name="recents_frequent_apps_summary">Show the four apps you used most this week below recent apps</string>
-    <string name="depth_wallpaper_floating_title">Floating depth wallpaper</string>
-    <string name="depth_wallpaper_floating_summary">With a depth wallpaper, the lock screen clock floats between the wallpaper and its subject as you tilt the phone</string>
     <string name="penguin_laboratory_title">Penguin Laboratory</string>
-    <string name="penguin_laboratory_summary">Edge lighting and more experiments</string>
-    <!-- One UI Quick Settings experiment -->
-    <string name="qs_oneui_title">One UI Quick Settings</string>
-    <string name="qs_oneui_summary">Replaces Quick Settings with a One UI style panel and always uses the split notification and Quick Settings shade. Other Quick Settings styles are incompatible and won\'t apply while this is on. Turning it off restores your previous style and shade.</string>
-    <string name="qs_panel_style_oneui_active">Unavailable while One UI Quick Settings is on in Experimental features</string>
+    <string name="penguin_laboratory_summary">Styles, experiments, edge lighting and more</string>
 </resources>

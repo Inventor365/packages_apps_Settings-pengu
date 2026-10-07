@@ -107,15 +107,6 @@
         android:fragment="com.android.settings.gestures.PowerMenuSettings"
         settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
 
-    <com.android.settings.custom.preference.SecureSettingListPreference
-        android:key="power_menu_style"
-        android:title="@string/power_menu_style_title"
-        android:dialogTitle="@string/power_menu_style_title"
-        android:entries="@array/power_menu_style_entries"
-        android:entryValues="@array/power_menu_style_values"
-        android:defaultValue="0"
-        android:summary="%s" />
-
     <Preference
         android:key="three_finger_gesture_summary"
         android:title="@string/three_finger_gesture"

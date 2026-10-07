@@ -157,12 +157,15 @@
         settings:controller="com.android.settings.system.ResetPreferenceController"/>
 
     <Preference
-        android:key="experimental_features_settings"
-        android:title="@string/experimental_features_title"
-        android:summary="@string/experimental_features_summary"
+        android:key="penguin_laboratory"
+        android:title="@string/penguin_laboratory_title"
+        android:summary="@string/penguin_laboratory_summary"
         android:icon="@drawable/ic_settings_experimental"
-        android:order="89"
-        android:fragment="com.android.settings.system.ExperimentalFeaturesSettings"/>
+        android:order="89">
+        <intent
+            android:targetPackage="com.penguin.laboratory"
+            android:targetClass="com.penguin.laboratory.LaboratoryActivity" />
+    </Preference>
 
     <Preference
         android:key="other_settings"
