@@ -91,7 +91,7 @@ class TeeSimulatorSettings : SettingsPreferenceFragment() {
 
     private fun loadConfigFromStore() {
         val cr = requireContext().contentResolver
-        teeEnabled = Settings.Secure.getInt(cr, SETTING_ENABLED, 0) == 1
+        teeEnabled = Settings.Secure.getInt(cr, SETTING_ENABLED, 1) == 1
         teeMode = normalizeMode(Settings.Secure.getString(cr, SETTING_MODE) ?: MODE_AUTO)
         val savedKeybox = Settings.Secure.getString(cr, SETTING_KEYBOX) ?: ""
         if (savedKeybox.isNotEmpty()) {
@@ -136,6 +136,18 @@ class TeeSimulatorSettings : SettingsPreferenceFragment() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+
+        if (teeTargetPackages.isEmpty()) {
+            val seed = TeeSimulatorAppSettings.DEFAULT_TARGETS.map { it } +
+                TeeSimulatorAppSettings.DEFAULT_TARGET_MODES.map { (pkg, mode) ->
+                    pkg + mode.symbol
+                }
+            teeTargetPackages.addAll(seed)
+            Settings.Secure.putString(cr, SETTING_PACKAGES, seed.joinToString("\n"))
+            persistConfigToStore()
+        } else if (!configFile.exists()) {
+            persistConfigToStore()
         }
 
         if (savedKeybox.isNotEmpty() && !File(STORE_DIR, KEYBOX_FILE).exists()) {
