@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 LumineDroid
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- ReVanced -->
+    <string name="revan_toggle_title">ReVanced Integration</string>
+    <string name="revan_toggle_summary">Use ReVanced variants of YouTube and YT Music instead of stock apps</string>
+    <string name="revan_restart_dialog_title">Restart device?</string>
+    <string name="revan_restart_dialog_message">Restart now to apply this change.</string>
+    <string name="revan_restart_now">Restart now</string>
+</resources>
