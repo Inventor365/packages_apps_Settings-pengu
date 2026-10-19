@@ -18,10 +18,17 @@ package com.android.settings.applications;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.pm.IPackageDeleteObserver;
+import android.content.pm.PackageManager;
+import android.os.PowerManager;
+import android.os.SystemProperties;
 import android.provider.SearchIndexableResource;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -32,9 +39,12 @@ import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
+import static android.os.UserHandle.USER_SYSTEM;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /** Settings page for apps. */
 // LINT.IfChange
@@ -44,6 +54,12 @@ public class AppDashboardFragment extends DashboardFragment {
     private static final String TAG = "AppDashboardFragment";
     private static final String ADVANCED_CATEGORY_KEY = "advanced_category";
     private static final String ASPECT_RATIO_PREF_KEY = "aspect_ratio_apps";
+    private static final String REVAN_PREF_KEY = "persist_revan_mod";
+    private static final String REVAN_PROP = "persist.sys.revan.mod";
+    private static final String[] REVAN_PACKAGES = {
+            "com.google.android.youtube",
+            "com.google.android.apps.youtube.music"
+    };
     private AppsPreferenceController mAppsPreferenceController;
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
@@ -94,6 +110,62 @@ public class AppDashboardFragment extends DashboardFragment {
         final HibernatedAppsPreferenceController hibernatedAppsPreferenceController =
                 use(HibernatedAppsPreferenceController.class);
         getSettingsLifecycle().addObserver(hibernatedAppsPreferenceController);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        final Preference pref = findPreference(REVAN_PREF_KEY);
+        if (pref instanceof SwitchPreferenceCompat) {
+            final SwitchPreferenceCompat toggle = (SwitchPreferenceCompat) pref;
+            toggle.setChecked(SystemProperties.getBoolean(REVAN_PROP, true));
+            toggle.setOnPreferenceChangeListener((p, newVal) -> {
+                showRevanRestartDialog(toggle, (Boolean) newVal);
+                return false;
+            });
+        }
+    }
+
+    private void showRevanRestartDialog(SwitchPreferenceCompat toggle, boolean enabled) {
+        new AlertDialog.Builder(getContext())
+                .setTitle(R.string.revan_restart_dialog_title)
+                .setMessage(R.string.revan_restart_dialog_message)
+                .setPositiveButton(R.string.revan_restart_now, (dialog, which) -> {
+                    final Context context = requireContext().getApplicationContext();
+                    toggle.setChecked(enabled);
+                    if (enabled) {
+                        uninstallUpdatesThenEnable(context);
+                    } else {
+                        SystemProperties.set(REVAN_PROP, "false");
+                        reboot(context);
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    private void uninstallUpdatesThenEnable(Context context) {
+        // Keep the property false while PackageManager restores stock system package paths.
+        final PackageManager pm = context.getPackageManager();
+        final AtomicInteger pendingDeletes = new AtomicInteger(REVAN_PACKAGES.length);
+        final IPackageDeleteObserver observer = new IPackageDeleteObserver.Stub() {
+            @Override
+            public void packageDeleted(String packageName, int returnCode) {
+                if (pendingDeletes.decrementAndGet() == 0) {
+                    SystemProperties.set(REVAN_PROP, "true");
+                    reboot(context);
+                }
+            }
+        };
+
+        for (String pkg : REVAN_PACKAGES) {
+            pm.deletePackageAsUser(pkg, observer, 0, USER_SYSTEM);
+        }
+    }
+
+    private void reboot(Context context) {
+        context.getSystemService(PowerManager.class).reboot(null);
     }
 
     @VisibleForTesting
