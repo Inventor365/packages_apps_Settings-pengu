@@ -587,4 +587,7 @@
     <string name="pif_spoof_signature_summary">Spoof package signature for Google Play Services</string>
     <string name="pif_spoof_vending_build">Spoof Play Store build properties</string>
     <string name="pif_spoof_vending_build_summary">Spoof build properties for Google Play Store</string>
+
+    <!-- About phone: build maintainer -->
+    <string name="maintainer_title">Maintainer</string>
 </resources>
