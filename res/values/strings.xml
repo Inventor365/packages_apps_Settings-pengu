@@ -3284,6 +3284,39 @@
     <!-- HDR brightness slider description for screen reader. -->
     <string name="hdr_brightness_slider_description">Intensity, make the intensity dimmer or brighter.</string>
 
+    <!-- Per-application HDR Playback Controller [CHAR LIMIT=NONE] -->
+    <string name="hdr_playback_controller_title">HDR playback controller</string>
+    <string name="hdr_playback_controller_eyebrow">PER-APP HDR POLICY</string>
+    <string name="hdr_playback_controller_summary_default">All apps follow system default</string>
+    <string name="hdr_playback_controller_summary_custom"><xliff:g id="count" example="3">%1$d</xliff:g> custom app overrides (<xliff:g id="sdr_count" example="2">%2$d</xliff:g> SDR only, <xliff:g id="hdr_count" example="1">%3$d</xliff:g> HDR allowed)</string>
+    <string name="hdr_playback_controller_intro">Control how individual apps render High Dynamic Range (HDR) media and UI. Restricting an app to SDR clamps its window HDR headroom to 1.0x and reports standard dynamic range capabilities so HDR content will not boost display brightness.</string>
+    <string name="hdr_playback_controller_limitation_note">Note: Window headroom clamping applies immediately. Active video players may require reopening the stream or restarting the app to switch decoder output formats.</string>
+    <string name="hdr_playback_status_all_default">All apps using system default</string>
+    <string name="hdr_playback_status_custom"><xliff:g id="total" example="2">%1$d</xliff:g> overrides • <xliff:g id="sdr" example="1">%2$d</xliff:g> SDR only • <xliff:g id="hdr" example="1">%3$d</xliff:g> HDR allowed</string>
+    <string name="hdr_playback_search_apps_hint">Search apps or packages</string>
+    <string name="hdr_playback_search_clear">Clear search</string>
+    <string name="hdr_playback_filter_all">All apps</string>
+    <string name="hdr_playback_filter_custom">Custom overrides</string>
+    <string name="hdr_playback_filter_restricted">Restricted (SDR only)</string>
+    <string name="hdr_playback_filter_allowed">HDR allowed</string>
+    <string name="hdr_playback_reset_all">Reset all</string>
+    <string name="hdr_playback_reset_app">Reset</string>
+    <string name="hdr_playback_reset_all_title">Reset all HDR app overrides?</string>
+    <string name="hdr_playback_reset_all_message">This will restore all apps to the system default HDR playback behavior.</string>
+    <string name="hdr_playback_apps_section_title">Installed applications</string>
+    <string name="hdr_playback_loading_apps">Loading applications\u2026</string>
+    <string name="hdr_playback_no_apps_found">No matching applications found</string>
+    <string name="hdr_playback_mode_default_title">System default</string>
+    <string name="hdr_playback_mode_default_desc">Follow the global Enhanced HDR brightness and display HDR conversion settings.</string>
+    <string name="hdr_playback_mode_allowed_title">Allow HDR</string>
+    <string name="hdr_playback_mode_allowed_desc">Permit full HDR capabilities and HDR headroom for this app even if global HDR brightness is turned off.</string>
+    <string name="hdr_playback_mode_sdr_only_title">Force SDR (Restrict HDR)</string>
+    <string name="hdr_playback_mode_sdr_only_desc">Report SDR capabilities to this app and clamp its window HDR headroom to 1.0x so videos and photos render without HDR brightness boost.</string>
+    <string name="hdr_playback_chip_default">Default</string>
+    <string name="hdr_playback_chip_allowed">Allow HDR</string>
+    <string name="hdr_playback_chip_sdr_only">SDR only</string>
+    <string name="keywords_hdr_playback_controller">hdr, sdr, hdr playback, per-app hdr, disable hdr, force sdr, bright video, dolby vision, hdr10, hlg, brightness</string>
+
     <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
     <string name="display_white_balance_title">Display white balance</string>
     <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
