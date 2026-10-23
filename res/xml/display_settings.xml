@@ -51,6 +51,14 @@
             settings:controller="com.android.settings.display.HdrBrightnessPreferenceController"/>
 
         <Preference
+            android:key="hdr_playback_controller"
+            android:title="@string/hdr_playback_controller_title"
+            android:summary="@string/hdr_playback_controller_summary_default"
+            android:fragment="com.android.settings.display.HdrPlaybackControllerSettings"
+            settings:keywords="@string/keywords_hdr_playback_controller"
+            settings:controller="com.android.settings.display.HdrPlaybackControllerPreferenceController"/>
+
+        <Preference
             android:key="outdoor_mode"
             android:title="@string/outdoor_mode_title"
             android:summary="@string/outdoor_mode_summary">
