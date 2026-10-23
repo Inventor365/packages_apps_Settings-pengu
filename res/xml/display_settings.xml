@@ -51,6 +51,14 @@
             settings:controller="com.android.settings.display.HdrBrightnessPreferenceController"/>
 
         <Preference
+            android:key="hdr_playback_controller"
+            android:title="@string/hdr_playback_controller_title"
+            android:summary="@string/hdr_playback_controller_summary_default"
+            android:fragment="com.android.settings.display.HdrPlaybackControllerSettings"
+            settings:keywords="@string/keywords_hdr_playback_controller"
+            settings:controller="com.android.settings.display.HdrPlaybackControllerPreferenceController"/>
+
+        <Preference
             android:key="dynamic_island_settings"
             android:title="@string/dynamic_island_title"
             android:summary="@string/dynamic_island_summary"
