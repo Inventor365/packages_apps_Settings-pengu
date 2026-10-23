@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 The Android Open Source Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="hdr_playback_controller_screen"
+    android:title="@string/hdr_playback_controller_title"
+    settings:keywords="@string/keywords_hdr_playback_controller">
+
+    <Preference
+        android:key="hdr_playback_controller_intro"
+        android:title="@string/hdr_playback_controller_title"
+        android:summary="@string/hdr_playback_controller_intro"
+        android:selectable="false"
+        settings:searchable="true"
+        settings:keywords="@string/keywords_hdr_playback_controller" />
+
+</PreferenceScreen>
