@@ -43,6 +43,14 @@
         settings:textEnd="@string/brightness_intensity_end_label"
         settings:controller="com.android.settings.display.HdrBrightnessLevelPreferenceController"/>
 
+    <Preference
+        android:key="hdr_playback_controller"
+        android:title="@string/hdr_playback_controller_title"
+        android:summary="@string/hdr_playback_controller_summary_default"
+        android:fragment="com.android.settings.display.HdrPlaybackControllerSettings"
+        settings:keywords="@string/keywords_hdr_playback_controller"
+        settings:controller="com.android.settings.display.HdrPlaybackControllerPreferenceController"/>
+
     <com.android.settingslib.widget.FooterPreference
         android:title="@string/hdr_brightness_warning"
         android:selectable="false"
