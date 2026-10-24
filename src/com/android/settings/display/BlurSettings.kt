@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,6 +43,7 @@ import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
@@ -51,6 +53,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -129,6 +132,17 @@ class BlurSettings : Fragment() {
             )
         }
 
+        var blurStyle by remember {
+            val lgOn = Settings.Secure.getInt(cr, KEY_LIQUID_GLASS, 0) != 0
+            val savedStyle =
+                Settings.Secure.getInt(
+                    cr,
+                    KEY_BLUR_STYLE,
+                    if (lgOn) BLUR_STYLE_LIQUID_GLASS else BLUR_STYLE_IOS_FROSTED,
+                )
+            mutableIntStateOf(if (lgOn) BLUR_STYLE_LIQUID_GLASS else savedStyle.coerceIn(0, 2))
+        }
+
         Scaffold(
             containerColor = MaterialTheme.colorScheme.surfaceContainer,
         ) { paddingValues ->
@@ -141,7 +155,7 @@ class BlurSettings : Fragment() {
                 contentPadding = PaddingValues(top = 16.dp, bottom = 32.dp),
             ) {
                 item {
-                    BlurIllustration(blursEnabled, blurIntensity)
+                    BlurIllustration(blursEnabled, blurIntensity, blurStyle)
                 }
 
                 item {
@@ -163,19 +177,132 @@ class BlurSettings : Fragment() {
                 }
 
                 item {
+                    BlurStyleSelectorCard(
+                        selectedStyle = blurStyle,
+                        enabled = blursEnabled,
+                        onStyleSelected = { newStyle ->
+                            blurStyle = newStyle
+                            Settings.Secure.putInt(cr, KEY_BLUR_STYLE, newStyle)
+                            Settings.Secure.putInt(
+                                cr,
+                                KEY_LIQUID_GLASS,
+                                if (newStyle == BLUR_STYLE_LIQUID_GLASS) 1 else 0,
+                            )
+                        },
+                    )
+                }
+
+                item {
                     BlurIntensitySlider(
                         value = blurIntensity,
                         enabled = blursEnabled,
                         onValueChange = { blurIntensity = it },
                         onValueChangeFinished = {
+                            val clamped =
+                                blurIntensity.roundToInt()
+                                    .coerceIn(MIN_BLUR_INTENSITY, MAX_BLUR_INTENSITY)
                             Settings.System.putInt(
                                 cr,
                                 Settings.System.BLUR_INTENSITY,
-                                blurIntensity.roundToInt()
-                                    .coerceIn(MIN_BLUR_INTENSITY, MAX_BLUR_INTENSITY),
+                                clamped,
+                            )
+                            Settings.Secure.putInt(
+                                cr,
+                                KEY_SYSTEM_BLUR_RADIUS,
+                                clamped,
                             )
                         },
                     )
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun BlurStyleSelectorCard(
+        selectedStyle: Int,
+        enabled: Boolean,
+        onStyleSelected: (Int) -> Unit,
+    ) {
+        val options = listOf(
+            Triple(
+                BLUR_STYLE_LIQUID_GLASS,
+                stringResource(R.string.blur_style_liquid_glass),
+                stringResource(R.string.blur_style_liquid_glass_summary),
+            ),
+            Triple(
+                BLUR_STYLE_IOS_FROSTED,
+                stringResource(R.string.blur_style_ios_frosted),
+                stringResource(R.string.blur_style_ios_frosted_summary),
+            ),
+            Triple(
+                BLUR_STYLE_STANDARD,
+                stringResource(R.string.blur_style_standard),
+                stringResource(R.string.blur_style_standard_summary),
+            ),
+        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(28.dp))
+                .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+                .padding(horizontal = 20.dp, vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            Text(
+                text = stringResource(R.string.blur_style_title),
+                style = MaterialTheme.typography.titleMedium,
+                color = if (enabled) {
+                    MaterialTheme.colorScheme.onSurface
+                } else {
+                    MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                },
+                modifier = Modifier.padding(bottom = 4.dp),
+            )
+            options.forEach { (styleValue, title, summary) ->
+                val isSelected = selectedStyle == styleValue
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(18.dp))
+                        .background(
+                            if (isSelected && enabled) {
+                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.45f)
+                            } else {
+                                Color.Transparent
+                            }
+                        )
+                        .clickable(enabled = enabled) { onStyleSelected(styleValue) }
+                        .padding(horizontal = 8.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    RadioButton(
+                        selected = isSelected,
+                        onClick = if (enabled) ({ onStyleSelected(styleValue) }) else null,
+                        enabled = enabled,
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
+                            color = if (enabled) {
+                                MaterialTheme.colorScheme.onSurface
+                            } else {
+                                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                            },
+                        )
+                        Text(
+                            text = summary,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (enabled) {
+                                MaterialTheme.colorScheme.onSurfaceVariant
+                            } else {
+                                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                            },
+                        )
+                    }
                 }
             }
         }
@@ -236,13 +363,17 @@ class BlurSettings : Fragment() {
     }
 
     @Composable
-    private fun BlurIllustration(enabled: Boolean, intensityPct: Float) {
+    private fun BlurIllustration(enabled: Boolean, intensityPct: Float, blurStyle: Int) {
         val context = LocalContext.current
 
         val layerFg = Color(context.getColor(com.android.internal.R.color.shade_panel_fg))
         val layerBg = Color(context.getColor(com.android.internal.R.color.shade_panel_bg))
         val compositeColor = ColorUtils.compositeColors(layerFg.toArgb(), layerBg.toArgb())
-        val shadeColor = Color(compositeColor)
+        val shadeColor = when (blurStyle) {
+            BLUR_STYLE_LIQUID_GLASS -> Color(0x400A0A10)
+            BLUR_STYLE_IOS_FROSTED -> Color(0x52121218)
+            else -> Color(compositeColor)
+        }
 
         val previewBlurDp =
             (MAX_PREVIEW_BLUR_RADIUS_DP * intensityPct / DEFAULT_BLUR_INTENSITY.toFloat())
@@ -305,7 +436,7 @@ class BlurSettings : Fragment() {
                                 ),
                         )
 
-                        QSContent()
+                        QSContent(enabled = enabled, blurStyle = blurStyle)
                     }
 
                     StatusBar()
@@ -314,10 +445,28 @@ class BlurSettings : Fragment() {
                 Box(
                     modifier = Modifier
                         .align(Alignment.TopCenter)
-                        .padding(top = 8.dp)
-                        .size(10.dp)
-                        .clip(CircleShape)
-                        .background(Color.Black),
+                        .padding(top = 7.dp)
+                        .width(34.dp)
+                        .height(10.dp)
+                        .clip(RoundedCornerShape(5.dp))
+                        .background(
+                            if (enabled && blurStyle == BLUR_STYLE_LIQUID_GLASS) {
+                                Color(0xCC18181E)
+                            } else if (enabled && blurStyle == BLUR_STYLE_IOS_FROSTED) {
+                                Color(0xD916161C)
+                            } else {
+                                Color.Black
+                            }
+                        )
+                        .border(
+                            0.6.dp,
+                            if (enabled && blurStyle != BLUR_STYLE_STANDARD) {
+                                Color.White.copy(alpha = if (blurStyle == BLUR_STYLE_LIQUID_GLASS) 0.45f else 0.22f)
+                            } else {
+                                Color.Transparent
+                            },
+                            RoundedCornerShape(5.dp),
+                        ),
                 )
             }
         }
@@ -419,7 +568,7 @@ class BlurSettings : Fragment() {
     }
 
     @Composable
-    private fun QSContent() {
+    private fun QSContent(enabled: Boolean = true, blurStyle: Int = BLUR_STYLE_IOS_FROSTED) {
         val icons = listOf(
             Icons.Filled.Wifi,
             Icons.Filled.Bluetooth,
@@ -430,6 +579,19 @@ class BlurSettings : Fragment() {
             Icons.Filled.Adb,
             Icons.Filled.NotificationsActive,
         )
+
+        val tileSurface = when {
+            !enabled -> MaterialTheme.colorScheme.surfaceBright
+            blurStyle == BLUR_STYLE_LIQUID_GLASS -> Color.White.copy(alpha = 0.22f)
+            blurStyle == BLUR_STYLE_IOS_FROSTED -> Color.White.copy(alpha = 0.16f)
+            else -> MaterialTheme.colorScheme.surfaceBright
+        }
+        val tileBorder = when {
+            !enabled -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f)
+            blurStyle == BLUR_STYLE_LIQUID_GLASS -> Color.White.copy(alpha = 0.55f)
+            blurStyle == BLUR_STYLE_IOS_FROSTED -> Color.White.copy(alpha = 0.28f)
+            else -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f)
+        }
 
         Column(
             modifier = Modifier
@@ -449,10 +611,10 @@ class BlurSettings : Fragment() {
                                 .height(20.dp)
                                 .weight(1f)
                                 .clip(RoundedCornerShape(12.dp))
-                                .background(MaterialTheme.colorScheme.surfaceBright)
+                                .background(tileSurface)
                                 .border(
-                                    0.5.dp,
-                                    MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f),
+                                    if (enabled && blurStyle == BLUR_STYLE_LIQUID_GLASS) 0.8.dp else 0.5.dp,
+                                    tileBorder,
                                     RoundedCornerShape(12.dp),
                                 ),
                             contentAlignment = Alignment.CenterStart,
@@ -543,5 +705,13 @@ class BlurSettings : Fragment() {
         private const val MAX_BLUR_INTENSITY = 200
         private const val DEFAULT_BLUR_INTENSITY = 100
         private const val MAX_PREVIEW_BLUR_RADIUS_DP = 34f
+
+        private const val KEY_LIQUID_GLASS = "penguin_liquid_glass"
+        private const val KEY_BLUR_STYLE = "penguin_blur_style"
+        private const val KEY_SYSTEM_BLUR_RADIUS = "system_blur_radius"
+
+        const val BLUR_STYLE_STANDARD = 0
+        const val BLUR_STYLE_IOS_FROSTED = 1
+        const val BLUR_STYLE_LIQUID_GLASS = 2
     }
 }
