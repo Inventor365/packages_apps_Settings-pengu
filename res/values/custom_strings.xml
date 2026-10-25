@@ -1482,13 +1482,6 @@ When the screen is off, the torch can be enabled with one of the following key c
     <string name="blur_intensity_value">%1$d%%</string>
     <string name="blur_settings_summary_on">On (%1$d%%)</string>
     <string name="blur_settings_summary_off">Off</string>
-    <string name="blur_style_title">Blur style</string>
-    <string name="blur_style_liquid_glass">iOS Liquid Glass</string>
-    <string name="blur_style_liquid_glass_summary">Optical lens refraction, chromatic dispersion, and specular glass rim</string>
-    <string name="blur_style_ios_frosted">iOS Frosted Blur</string>
-    <string name="blur_style_ios_frosted_summary">Apple UIVisualEffectView vibrancy with rich saturation and satin frost</string>
-    <string name="blur_style_standard">Standard Blur</string>
-    <string name="blur_style_standard_summary">Classic Android Kawase backdrop blur</string>
 
     <!-- Ambient timeout -->
     <string name="ambient_time_out_title">Ambient notification time out</string>
