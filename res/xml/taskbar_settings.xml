@@ -12,7 +12,14 @@
         android:key="taskbar_behaviour_category"
         android:title="@string/taskbar_behaviour_category">
 
+        <com.android.settings.custom.preference.SecureSettingSwitchPreference
+            android:key="penguin_taskbar_autohide"
+            android:title="@string/taskbar_autohide_title"
+            android:summary="@string/taskbar_autohide_summary"
+            android:defaultValue="true" />
+
         <com.android.settings.custom.preference.SecureSettingSeekBarPreference
+            android:dependency="penguin_taskbar_autohide"
             android:key="penguin_taskbar_hover_delay"
             android:title="@string/taskbar_hover_delay_title"
             android:summary="@string/taskbar_hover_delay_summary"
@@ -23,6 +30,7 @@
             settings:units="@string/taskbar_unit_ms" />
 
         <com.android.settings.custom.preference.SecureSettingSeekBarPreference
+            android:dependency="penguin_taskbar_autohide"
             android:key="penguin_taskbar_autohide_timeout"
             android:title="@string/taskbar_autohide_timeout_title"
             android:summary="@string/taskbar_autohide_timeout_summary"
