@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Penguin maintainer -->
+    <string name="maintainer">Maintainer</string>
+    <string name="penguin_maintainer" translatable="false">Unofficial Maintainer</string>
+</resources>
