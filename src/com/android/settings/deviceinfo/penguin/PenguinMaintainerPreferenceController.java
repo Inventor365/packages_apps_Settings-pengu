@@ -56,6 +56,7 @@ public class PenguinMaintainerPreferenceController extends BasePreferenceControl
     private static final String OFFICIAL_DEVICES_URL =
             "https://raw.githubusercontent.com/Project-PenguinOS/OTA/main/official_devices.json";
     private static final String PROP_DEVICE = "ro.aospa.device";
+    private static final String PROP_MAINTAINER = "ro.penguin.maintainer";
     private static final int TIMEOUT_MS = 10_000;
     private static final int MAX_LIST_BYTES = 64 * 1024;
 
@@ -81,7 +82,7 @@ public class PenguinMaintainerPreferenceController extends BasePreferenceControl
 
     @Override
     public CharSequence getSummary() {
-        String maintainer = mContext.getString(R.string.penguin_maintainer);
+        String maintainer = getMaintainer();
         return TextUtils.isEmpty(maintainer)
                 ? mContext.getString(R.string.maintainer_unknown) : maintainer;
     }
@@ -104,7 +105,7 @@ public class PenguinMaintainerPreferenceController extends BasePreferenceControl
     }
 
     private void bind(Preference preference, int state) {
-        String maintainer = mContext.getString(R.string.penguin_maintainer);
+        String maintainer = getMaintainer();
         if (state == STATE_OFFICIAL) {
             preference.setTitle(R.string.maintainer_official);
             preference.setSummary(getSummary());
@@ -117,6 +118,13 @@ public class PenguinMaintainerPreferenceController extends BasePreferenceControl
             preference.setTitle(R.string.maintainer);
             preference.setSummary(getSummary());
         }
+    }
+
+    // Device trees without a Settings overlay can set ro.penguin.maintainer instead.
+    private String getMaintainer() {
+        String maintainer = mContext.getString(R.string.penguin_maintainer);
+        return TextUtils.isEmpty(maintainer)
+                ? SystemProperties.get(PROP_MAINTAINER) : maintainer;
     }
 
     private int checkOfficial() {
