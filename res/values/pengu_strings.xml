@@ -71,6 +71,8 @@
 
     <!-- Dynamic island: lock screen and system events -->
     <string name="dynamic_island_events_title">System events</string>
+    <string name="dynamic_island_disable_in_landscape_title">Disable in landscape</string>
+    <string name="dynamic_island_disable_in_landscape_summary">Hide the Dynamic Island while the device is held sideways</string>
     <string name="dynamic_island_lockscreen_title">Show on lock screen</string>
     <string name="dynamic_island_lockscreen_summary">Keep the island on the lock screen</string>
     <string name="dynamic_island_battery_title">Charging</string>
