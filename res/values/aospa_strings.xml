@@ -123,6 +123,24 @@
     <string name="device_market_name">Market Name</string>
     <string name="soc_model">SoC Model</string>
     <string name="total_ram">Total RAM</string>
+    <string name="device_spec_cpu_title">CPU</string>
+    <string name="device_spec_storage_title">Storage</string>
+    <string name="device_spec_display_title">Display</string>
+    <string name="device_spec_battery_title">Battery</string>
+    <string name="device_spec_camera_title">Camera</string>
+    <plurals name="device_spec_cpu_cores">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> core</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> cores</item>
+    </plurals>
+    <plurals name="device_spec_cpu_cores_freq">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> core, up to <xliff:g id="frequency">%2$s</xliff:g> GHz</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> cores, up to <xliff:g id="frequency">%2$s</xliff:g> GHz</item>
+    </plurals>
+    <string name="device_spec_gb"><xliff:g id="size">%1$d</xliff:g> GB</string>
+    <string name="device_spec_tb"><xliff:g id="size">%1$d</xliff:g> TB</string>
+    <string name="device_spec_display"><xliff:g id="width">%1$d</xliff:g> × <xliff:g id="height">%2$d</xliff:g>, <xliff:g id="refresh_rate">%3$d</xliff:g> Hz</string>
+    <string name="device_spec_display_size"><xliff:g id="size">%1$s</xliff:g>, <xliff:g id="width">%2$d</xliff:g> × <xliff:g id="height">%3$d</xliff:g>, <xliff:g id="refresh_rate">%4$d</xliff:g> Hz</string>
+    <string name="device_spec_battery"><xliff:g id="capacity">%1$d</xliff:g> mAh</string>
 
     <!-- Wifi/Bluetooth auto timeout -->
     <string name="wifi_timeout_summary_auto">WiFi will turn off after <xliff:g id="timeout_description">%1$s</xliff:g> if no network connected</string>

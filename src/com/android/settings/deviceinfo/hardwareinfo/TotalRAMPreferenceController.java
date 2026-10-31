@@ -1,64 +1,38 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright (C) 2026 The PenguinOS Project
+ * SPDX-License-Identifier: Apache-2.0
  */
 
 package com.android.settings.deviceinfo.hardwareinfo;
 
-import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Process;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.slices.Sliceable;
 
-import java.text.DecimalFormat;
+/** Installed RAM, rounded up to the marketed size (the kernel reserves part of it). */
+public class TotalRAMPreferenceController extends DeviceSpecPreferenceController {
 
-public class TotalRAMPreferenceController extends BasePreferenceController {
+    private static final int[] SIZES_GB = {1, 2, 3, 4, 6, 8, 10, 12, 16, 18, 20, 24, 32, 48, 64};
 
     public TotalRAMPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(R.bool.config_show_device_model)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public boolean useDynamicSliceSummary() {
-        return true;
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return true;
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        ActivityManager actManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
-        actManager.getMemoryInfo(memInfo);
-
-        long totRam = memInfo.totalMem;
-        double gb = (double) totRam / 1000000000.0;
-        
-        DecimalFormat df = new DecimalFormat("#");
-        String formattedRam = df.format(gb);
-        
-        return formattedRam + " GB";
+    protected CharSequence loadSummary() {
+        final long bytes = Process.getTotalMemory();
+        if (bytes <= 0) {
+            return null;
+        }
+        final double gib = bytes / (1024.0 * 1024.0 * 1024.0);
+        int size = (int) Math.ceil(gib);
+        for (int candidate : SIZES_GB) {
+            if (candidate >= gib) {
+                size = candidate;
+                break;
+            }
+        }
+        return mContext.getString(R.string.device_spec_gb, size);
     }
 }

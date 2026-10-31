@@ -54,4 +54,10 @@
         <item>com.google.android.gm</item>
         <item>com.google.android.googlequicksearchbox</item>
     </string-array>
+
+    <!-- Device specifications on the Model and hardware page. Empty hides the camera row and
+         falls back to the SoC manufacturer and model, and to resolution only for the display. -->
+    <string name="config_device_soc_name" translatable="false"></string>
+    <string name="config_device_display_size" translatable="false"></string>
+    <string name="config_device_camera_spec" translatable="false"></string>
 </resources>
