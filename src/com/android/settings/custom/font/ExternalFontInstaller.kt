@@ -36,7 +36,6 @@ class ExternalFontInstaller(private val context: Context) {
         private const val TEMP_PREVIEW_FONT = "preview_font.ttf"
         private const val OVERLAY_CATEGORY_FONT = "android.theme.customization.font"
         const val DEFAULT_FONT_FAMILY = "google-sans-flex"
-        private const val DEFAULT_FONT_OVERLAY = "com.android.theme.font.googlesansflex"
 
         fun rebootDevice() {
             runCatching {
@@ -115,7 +114,19 @@ class ExternalFontInstaller(private val context: Context) {
                 FontStyle()
             ).build()
 
+            // Without a font overlay the system text uses the Google Sans families
+            // (config_bodyFontFamily is google-sans-text), so replace those too.
             val familiesToReplace = listOf(
+                "google-sans",
+                "google-sans-medium",
+                "google-sans-bold",
+                "google-sans-clock",
+                "google-sans-text",
+                "google-sans-text-medium",
+                "google-sans-text-bold",
+                "google-sans-text-italic",
+                "google-sans-text-medium-italic",
+                "google-sans-text-bold-italic",
                 "google-sans-flex",
                 "google-sans-flex-clock",
                 "variable-display-large",
@@ -192,8 +203,8 @@ class ExternalFontInstaller(private val context: Context) {
         }.getOrElse { JSONObject() }
 
         runCatching {
-            if (json.has(OVERLAY_CATEGORY_FONT)) json.remove(OVERLAY_CATEGORY_FONT)
-            json.put(OVERLAY_CATEGORY_FONT, DEFAULT_FONT_OVERLAY)
+            // No font overlay, so the replaced default families are used.
+            json.remove(OVERLAY_CATEGORY_FONT)
 
             Settings.Secure.putStringForUser(
                 resolver,
