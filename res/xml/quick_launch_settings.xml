@@ -32,6 +32,16 @@
         android:title="@string/quick_launch_title"
         settings:controller="com.android.settings.gestures.quicklaunch.QuickLaunchMainSwitchPreferenceController" />
 
+    <com.android.settings.custom.preference.SecureSettingSeekBarPreference
+        android:key="quick_launch_hold_time"
+        android:title="@string/quick_launch_hold_time_title"
+        android:summary="@string/quick_launch_hold_time_summary"
+        android:defaultValue="500"
+        android:max="1500"
+        settings:seekBarIncrement="50"
+        settings:min="200"
+        settings:units="@string/unit_milliseconds" />
+
     <!-- Current Menu Arc Preview Card with Edit Button -->
     <com.android.settings.gestures.quicklaunch.QuickLaunchPreviewPreference
         android:key="quick_launch_preview"
