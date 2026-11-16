@@ -307,6 +307,18 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                   android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                   android:taskAffinity="com.android.settings.root" />
 
+        <!-- Penguin Laboratory opens the PenguinOS pages it links to through this -->
+        <activity android:name=".custom.lab.PenguinLabLinkActivity"
+                  android:exported="true"
+                  android:permission="android.permission.WRITE_SECURE_SETTINGS"
+                  android:theme="@style/Theme.SubSettings"
+                  android:taskAffinity="com.android.settings.root">
+            <intent-filter>
+                <action android:name="com.android.settings.action.PENGUIN_LAB_LINK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
                   android:label="@string/settings_shortcut">
