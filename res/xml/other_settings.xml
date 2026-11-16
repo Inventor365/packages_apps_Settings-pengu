@@ -46,6 +46,7 @@
 
     <!-- Keep empty category at the bottom for injected settings -->
     <PreferenceCategory
+        android:key="other_miscellaneous"
         android:title="@string/miscellaneous_settings">
     </PreferenceCategory>
 
