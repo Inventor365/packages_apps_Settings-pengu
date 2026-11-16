@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -61,6 +62,8 @@ public class FingerprintSettingsScreenOffUnlockUdfpsPreferenceController
             return false;
         } else if (getRestrictingAdmin() != null) {
             return false;
+        } else if (isScreenOffIconOn()) {
+            return false;
         }
         final boolean defEnabled = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_screen_off_udfps_default_on);
@@ -92,8 +95,17 @@ public class FingerprintSettingsScreenOffUnlockUdfpsPreferenceController
         } else if (getRestrictingAdmin() != null) {
             preference.setEnabled(false);
         } else {
-            preference.setEnabled(true);
+            preference.setEnabled(!isScreenOffIconOn());
         }
+        preference.setSummary(isScreenOffIconOn()
+                ? R.string.screen_off_unlock_udfps_icon_summary
+                : R.string.security_settings_screen_off_unlock_udfps_description);
+    }
+
+    /** The screen-off fingerprint icon in Penguin Laboratory covers screen-off unlock. */
+    private boolean isScreenOffIconOn() {
+        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.DOZE_UDFPS_ICON, 0, getUserHandle()) == 1;
     }
 
     @SuppressLint("MissingPermission")

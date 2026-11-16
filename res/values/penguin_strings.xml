@@ -7,4 +7,7 @@
     <string name="maintainer_unofficial_build">Unofficial build</string>
     <string name="maintainer_unknown">Unknown</string>
     <string name="penguin_maintainer" translatable="false"></string>
+
+    <!-- Fingerprint: screen-off unlock while the screen-off fingerprint icon is on -->
+    <string name="screen_off_unlock_udfps_icon_summary">Off while the fingerprint icon shows with the screen off</string>
 </resources>
