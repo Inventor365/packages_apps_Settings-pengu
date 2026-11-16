@@ -20,67 +20,6 @@
     android:key="lockscreen_from_display_settings"
     android:title="@string/lockscreen_settings_title">
 
-    <PreferenceCategory    
-        android:key="lockscreen_weather_category"
-        android:title="@string/lockscreen_weather_category">
-
-        <Preference
-            android:key="lockscreen_weather"
-            android:title="@string/weather_settings_title"
-            android:summary="@string/weather_settings_summary"
-            android:fragment="com.android.settings.lockscreen.LockScreenWeather" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="lockscreen_interface_category"
-        android:title="@string/lockscreen_interface_category_title">
-
-        <com.android.settings.custom.preference.SystemSettingListPreference
-            android:key="lockscreen_display_timeout"
-            android:title="@string/lockscreen_display_timeout_title"
-            android:summary="%s"
-            android:entries="@array/lockscreen_display_timeout_entries"
-            android:entryValues="@array/lockscreen_display_timeout_values"
-            android:defaultValue="10000" />
-
-        <com.android.settings.custom.preference.SystemSettingSwitchPreference
-            android:key="lockscreen_battery_info"
-            android:title="@string/lockscreen_battery_info_title"
-            android:summary="@string/lockscreen_battery_info_summary"
-            android:defaultValue="true" />
-
-        <com.android.settings.custom.preference.SystemSettingSwitchPreference
-            android:key="enable_ripple_effect"
-            android:title="@string/enable_fingerprint_ripple_effect_title"
-            android:summary="@string/enable_fingerprint_ripple_effect_summary"
-            android:defaultValue="true" />
-
-        <Preference
-            android:key="lockscreen_media_art"
-            android:title="@string/ls_media_art_title"
-            android:summary="@string/ls_media_art_summary"
-            android:fragment="com.android.settings.display.MediaArtSettings" />
-            
-        <Preference
-            android:key="lockscreen_pulse"
-            android:title="@string/pulse_settings_title"
-            android:summary="@string/pulse_settings_summary"
-            android:fragment="com.android.settings.display.PulseSettings" />
-
-        <com.android.settings.custom.preference.SystemSettingSwitchPreference
-            android:key="ls_clock_hide"
-            android:title="@string/ls_clock_hide_title"
-            android:summary="@string/ls_clock_hide_summary"
-            android:defaultValue="false" />
-
-        <Preference
-            android:key="depth_wallpaper"
-            android:title="@string/dw_wallpaper_enabled_title"
-            android:summary="@string/dw_wallpaper_enabled_summary"
-            android:fragment="com.android.settings.lockscreen.WallpaperDepth" />              
-    </PreferenceCategory>
-
     <PreferenceCategory
         android:key="lockscreen_what_to_show"
         android:title="@string/lockscreen_settings_what_to_show_category">
@@ -155,28 +94,6 @@
             android:title="@string/lockscreen_double_line_clock_setting_toggle"
             android:summary="@string/lockscreen_double_line_clock_summary"
             settings:controller="com.android.settings.display.LockscreenClockPreferenceController" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="secure_lockscreen_category"
-        android:title="@string/secure_lockscreen_category_title">
-
-        <com.android.settings.custom.preference.SystemSettingSwitchPreference
-            android:key="lockscreen_enable_power_menu"
-            android:title="@string/lockscreen_enable_power_menu_title"
-            android:summary="@string/lockscreen_enable_power_menu_summary"
-            android:defaultValue="true" />
-
-        <com.android.settings.custom.preference.SecureSettingSwitchPreference
-            android:key="enable_lockscreen_quick_settings"
-            android:title="@string/quick_settings_secure_lock_screen_title"
-            android:defaultValue="false" />
-
-        <com.android.settings.custom.preference.SecureSettingSwitchPreference
-            android:key="qstile_requires_unlocking"
-            android:title="@string/qstile_requires_unlocking_title"
-            android:summary="@string/qstile_requires_unlocking_summary"
-            android:defaultValue="true" />
     </PreferenceCategory>
 
     <PreferenceCategory

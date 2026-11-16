@@ -51,12 +51,6 @@
             settings:controller="com.android.settings.display.HdrBrightnessPreferenceController"/>
 
         <Preference
-            android:key="dynamic_island_settings"
-            android:title="@string/dynamic_island_title"
-            android:summary="@string/dynamic_island_summary"
-            android:fragment="com.android.settings.display.DynamicIslandSettings" />
-
-        <Preference
             android:key="outdoor_mode"
             android:title="@string/outdoor_mode_title"
             android:summary="@string/outdoor_mode_summary">
@@ -65,13 +59,6 @@
                 android:targetPackage="com.android.launcher3" />
         </Preference>
 
-        <com.android.settings.custom.preference.SecureSettingSwitchPreference
-            android:key="qs_show_auto_brightness"
-            android:title="@string/status_bar_brightness_slider_auto_title"
-            android:summary="@string/status_bar_brightness_slider_auto_summary"
-            settings:requiresConfig="@*android:bool/config_automatic_brightness_available"
-            android:defaultValue="true" />
-
         <com.android.settingslib.PrimarySwitchPreference
             android:fragment="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment"
             android:key="reduce_bright_colors_preference"
@@ -79,13 +66,6 @@
             android:title="@string/reduce_bright_colors_preference_title"
             settings:keywords="@string/keywords_reduce_bright_colors"
             settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
-
-        <Preference
-            android:key="smart_pixels"
-            android:title="@string/smart_pixels_title"
-            android:summary="@string/smart_pixels_summary"
-            android:fragment="com.android.settings.custom.smartpixel.SmartPixelsSettings"
-            settings:controller="com.android.settings.custom.smartpixel.SmartPixelsPreferenceController" />
 
     </PreferenceCategory>
 
@@ -269,19 +249,6 @@
             android:title="@string/window_blurs"
             android:fragment="com.android.settings.display.BlurSettings"
             settings:controller="com.android.settings.display.BlurSettingsPreferenceController" />
-
-        <com.android.settings.custom.preference.GlobalSettingSwitchPreference
-            android:key="wake_when_plugged_or_unplugged"
-            android:title="@string/wake_when_plugged_or_unplugged_title"
-            android:summary="@string/wake_when_plugged_or_unplugged_summary"
-            android:defaultValue="@*android:bool/config_unplugTurnsOnScreen"
-            settings:requiresConfig="@bool/config_show_top_level_battery" />    
-
-        <Preference
-            android:key="statusbar_padding"
-            android:title="@string/statusbar_padding_title"
-            android:summary="@string/statusbar_padding_summary"
-            android:fragment="com.android.settings.display.StatusbarPaddingSettings" />
 
         <Preference
             android:key="display_cutout_force_fullscreen_settings"

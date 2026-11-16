@@ -10,12 +10,6 @@
     android:title="@string/theme_settings_title">
 
     <Preference
-        android:key="lock_glymps_settings"
-        android:title="@string/lock_glymps_title"
-        android:summary="@string/lock_glymps_enable_summary"
-        android:fragment="com.android.settings.themes.LockGlympsSettings" />
-
-    <Preference
         android:key="wallpaper_settings"
         android:title="@string/wallpaper_settings_title"
         android:summary="@string/wallpaper_settings_summary"

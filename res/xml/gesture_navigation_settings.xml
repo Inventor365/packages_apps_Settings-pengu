@@ -33,17 +33,6 @@
             settings:buttonPreferenceSize="normal"
             settings:buttonPreferenceType="filled" />
 
-        <com.android.settings.custom.preference.SecureSettingSwitchPreference
-            android:key="sysui_show_nav_bar_ime"
-            android:title="@string/show_ime_space_title"
-            android:summary="@string/show_ime_space_summary"
-            android:defaultValue="true" />
-
-        <Preference
-            android:key="gesture_nav_custom_options"
-            android:title="@string/navbar_gesture_tweaks_pref_title"
-            android:summary="@string/navbar_gesture_tweaks_pref_summary"
-            android:fragment="com.android.settings.gestures.GestureTweaksSettings" />
     </PreferenceCategory>
 
     <com.android.settingslib.widget.SliderPreference
@@ -82,11 +71,6 @@
 
     <PreferenceCategory
         android:title="@string/navbar_category">
-
-        <com.android.settings.custom.preference.SystemSettingSwitchPreference
-            android:key="enable_taskbar"
-            android:title="@string/navigation_bar_enable_taskbar_title"
-            android:summary="@string/navigation_bar_enable_taskbar_summary" />
 
         <com.android.settings.custom.preference.SecureSettingSwitchPreference
             android:key="navigation_bar_hint"
@@ -132,24 +116,6 @@
             android:max="2"
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="back_gesture_feedback_category"
-        android:persistent="false"
-        android:title="@string/back_gesture_feedback_title">
-
-        <com.android.settings.custom.preference.SecureSettingSwitchPreference
-            android:key="back_gesture_arrow"
-            android:title="@string/back_gesture_arrow_title"
-            android:summary="@string/back_gesture_arrow_summary"
-            android:defaultValue="true" />
-
-        <com.android.settings.custom.preference.SecureSettingSwitchPreference
-            android:key="back_gesture_haptic"
-            android:title="@string/back_gesture_haptic_title"
-            android:summary="@string/back_gesture_haptic_summary"
-            android:defaultValue="true" />
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
