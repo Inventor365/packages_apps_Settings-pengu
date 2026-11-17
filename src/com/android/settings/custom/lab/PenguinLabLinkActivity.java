@@ -23,6 +23,7 @@ public class PenguinLabLinkActivity extends SubSettings {
     private static final String EXTRA_TITLE = "title";
 
     private static final Set<String> PAGES = Set.of(
+            "com.android.settings.custom.obscura.ObscuraAppSettings",
             "com.android.settings.custom.networktraffic.NetworkTrafficSettings",
             "com.android.settings.display.StatusbarPaddingSettings",
             "com.android.settings.display.DynamicIslandSettings",
