@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.preference.ListPreference;
 
@@ -104,6 +105,7 @@ public class OffscreenGestureSettings extends SettingsPreferenceFragment impleme
     }
 
     private OffscreenGestureEnabler mGestureEnabler;
+    private boolean mGesturesEnabled;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -111,6 +113,7 @@ public class OffscreenGestureSettings extends SettingsPreferenceFragment impleme
 
         final boolean enabled = Settings.System.getIntForUser(getContext().getContentResolver(),
                 Settings.System.GESTURES_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
+        mGesturesEnabled = enabled;
         for (String gestureKey : sGesturesKeyCodes.keySet()) {
             if (getResources().getInteger(sGesturesKeyCodes.get(gestureKey)) > 0) {
                 ListPreference pref = findPreference(gestureKey);
@@ -130,6 +133,38 @@ public class OffscreenGestureSettings extends SettingsPreferenceFragment impleme
                 removePreference(gestureKey);
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // The single tap is set in the Laboratory, so it may have changed while we were away.
+        updateDoubleTap();
+    }
+
+    /** Whether a single tap on the dark screen does something (Laboratory > Styles). */
+    private boolean isScreenOffTapOn() {
+        return !TextUtils.isEmpty(getResources().getString(
+                        com.android.internal.R.string.config_dozeTapSensorType))
+                && Settings.Secure.getIntForUser(getContentResolver(),
+                        Settings.Secure.DOZE_TAP_SCREEN_GESTURE,
+                        getResources().getBoolean(
+                                com.android.internal.R.bool.config_dozeTapGestureEnabled) ? 1 : 0,
+                        UserHandle.USER_CURRENT) != 0;
+    }
+
+    /**
+     * Penguin: like iOS, either a single tap or a double tap wakes the dark screen. While the
+     * single tap is on the panel reports every tap as one and the power service holds double
+     * tap off, so show it greyed out.
+     */
+    private void updateDoubleTap() {
+        final ListPreference pref = findPreference(KEY_DOUBLE_TAP);
+        if (pref == null) return;
+        final boolean tapOn = isScreenOffTapOn();
+        pref.setEnabled(mGesturesEnabled && !tapOn);
+        pref.setSummary(tapOn ? getString(R.string.gestures_double_tap_single_tap_on_summary)
+                : "%s");
     }
 
     @Override
@@ -159,12 +194,14 @@ public class OffscreenGestureSettings extends SettingsPreferenceFragment impleme
 
     @Override
     public void onChanged(boolean enabled) {
+        mGesturesEnabled = enabled;
         for (String gestureKey : sGesturesKeyCodes.keySet()) {
             if (getResources().getInteger(sGesturesKeyCodes.get(gestureKey)) > 0) {
                 ListPreference gesturePref = findPreference(gestureKey);
                 gesturePref.setEnabled(enabled);
             }
         }
+        updateDoubleTap();
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER = new BaseSearchIndexProvider() {

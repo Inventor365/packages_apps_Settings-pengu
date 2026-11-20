@@ -10,4 +10,7 @@
 
     <!-- Fingerprint: screen-off unlock while the screen-off fingerprint icon is on -->
     <string name="screen_off_unlock_udfps_icon_summary">Off while the fingerprint icon shows with the screen off</string>
+
+    <!-- Screen-off gestures: double tap while single tap on the dark screen (Laboratory > Styles) is on -->
+    <string name="gestures_double_tap_single_tap_on_summary">Off while a single tap on the dark screen is on</string>
 </resources>
